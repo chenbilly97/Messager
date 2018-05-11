@@ -1,0 +1,57 @@
+.container {
+    width: 650px;
+    margin: 0 auto;
+    border :solid 1px #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: skyblue;
+}
+
+.chat-container
+{
+    height: 600px;
+    overflow: auto;
+    transform :rotate(180deg);
+    direction: rtl;
+}
+
+
+.message {
+  border :solid 1px #ccc;
+  padding :20px;
+  transform :rotate(180deg);
+  direction :ltr;
+  width:51%;
+  border-radius: 5px;
+}
+
+.outgoing {
+    float: left;
+}
+
+.incoming{
+    float: right;
+}
+
+.avatar {
+float :left;
+margin-right :5px;
+}
+
+.datetime {
+  float: right;
+  color: #999;
+}
+
+.incomingMessage {
+   height :50px;
+   width : 70%;
+   border: solid 1px #ccc;
+   border-radius: 5px;
+}
+
+.messageBox {
+    margin: auto;
+    width: 800px;
+    padding-top: 10px;
+}

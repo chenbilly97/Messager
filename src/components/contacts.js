@@ -3,39 +3,38 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import fetchFriends from '../actions/fetchFriendList';
 import fetchConversation from '../actions/fetchConversation';
-
+import getCookie  from '../cookies';
 class Contacts extends Component {
 
     constructor (props)
     {
       super(props);
-      this.state = ({'user':props.match.params.user});
       this.renderFriends = this.renderFriends.bind(this);
+      this.state = ({'user':''});
     }
 
    componentWillMount() {
-        this.props.fetchFriends(this.state.user);
-
+      this.props.fetchFriends(getCookie('user'));
       }
-   
+
    renderFriends (data) {
-        const url = `/chat/${this.state.user}/${data.friend}/${data.sessionId}`;
+        const url = `/chat/${getCookie('user')}/${data.friend.S}/${data.sessionId.S}`;
         return (
-          <tr key={data.friend}>
-            <td> <a href={url}>{data.friend}</a></td>
+          <tr key={data.friend.S}>
+            <td> <a href={url}>{data.friend.S}</a></td>
             </tr>
           );
-      } 
-  
+      }
+
       render () {
        const fs = this.props.friends[0];
        if (fs=== undefined)
-         return <div><h1>Loading...</h1></div>;  
+         return <div><h1>Loading...</h1></div>;
        else if (fs.Items === undefined)
-         return <div><h1>Cannot find Friend List</h1></div>;   
-        
-       const friends = fs.Items[0].friends.SS;
-       const sessionIds = fs.Items[0].sessionId.SS;
+         return <div><h1>Cannot find Friend List</h1></div>;
+
+       const friends = fs.Items[0].friends.L;
+       const sessionIds = fs.Items[0].sessionId.L;
        const length = friends.length;
        var data =  [];
        for (var i=0;i<length;i++)
@@ -59,9 +58,9 @@ class Contacts extends Component {
    }
 }
 
-function mapStateToProps ({friends,conversation})
+function mapStateToProps ({friends,conversation,user})
 {
-  return {friends,conversation};
+  return {friends,conversation,user};
 }
 
 function mapDispatchToProps(dispatch){

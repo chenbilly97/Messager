@@ -4,25 +4,27 @@ import '../css/profile.css';
 import {connect} from 'react-redux';
 import fetchProfile from '../actions/fetchProfile';
 import {bindActionCreators} from 'redux';
+import getCookie  from '../cookies';
 
- class Profile extends Component  {   
+ class Profile extends Component  {
     constructor (props)
     {
       super(props);
-      this.state = ({'user':props.match.params.user,'sex':props.profile.sex,'age':'','race':''});
+      this.state = ({'user':'','sex':props.profile.sex,'age':'','race':''});
     }
 
     componentWillMount() {
-      this.props.fetchProfile(this.state.user);
+      this.props.fetchProfile(getCookie('user'));
     }
 
+
     render () {
-        if (this.state.user === '')
+        if (getCookie('user') === '')
         {
-          alert ('Please Sign in '); 
+          alert ('Please Sign in ');
           return <Redirect to='/login' />
          }
-        const profile = this.props.profile.pop(); 
+        const profile = this.props.profile.pop();
         if (profile === undefined)
           return <div> <h1>Loading ...</h1> </div>
         return (
@@ -31,28 +33,28 @@ import {bindActionCreators} from 'redux';
              <div className="form-group">
              <div className="formComponent">
              <label >Username </label>
-              <input type="text" 
+              <input type="text"
                  className=" col-sm-4 input"
-                 value = {this.state.user} 
+                 value = {getCookie('user')}
                  readOnly />
-             </div> 
+             </div>
              <div className="formComponent">
              <label >Sex </label>
-              <input type="text" 
+              <input type="text"
                  className=" col-sm-4 input"
                  value = {profile.sex}
                  readOnly  />
-             </div>   
+             </div>
             <div className="formComponent">
             <label >Age </label>
-              <input type="text" 
+              <input type="text"
                  className=" col-sm-4 input"
                  value = {profile.age}
                  readOnly  />
-             </div>   
+             </div>
              <div className="formComponent">
             <label >Race </label>
-              <input type="text" 
+              <input type="text"
                  className=" col-sm-4 input"
                  value = {profile.race}
                  readOnly  />
@@ -64,9 +66,9 @@ import {bindActionCreators} from 'redux';
     }
 }
 
-function mapStateToProps ({profile})
+function mapStateToProps ({profile,user})
 {
-  return {profile};
+  return {profile,user};
 }
 
 function mapDispatchToProps(dispatch){

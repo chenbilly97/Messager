@@ -1,19 +1,26 @@
-import React from 'react';
+import React,{Component} from 'react';
 import  '../css/navigationbar.css';
+import {connect} from 'react-redux';
+import getCookie  from '../cookies';
 
-function Navigationbar(props) {
-    const user = props.user;
-    const profileUrl = `/profile/${user}`;
-    const contactsUrl = `/contacts/${user}`;
+class Navigationbar extends Component {
+  render() {
+    const user = getCookie('user');
     return  (
       <div className="navbar">
         <a href="/login">Home</a>
-        <a href={contactsUrl}>Contacts</a>
+        <a href={`/contacts`}>Contacts</a>
         <div>
-        <a href={profileUrl}>Profile</a>
+        <a href={`/profile`}>Profile</a>
         </div>
       </div>
     );
   }
+}
 
-  export default Navigationbar;
+function mapStateToProps ({user})
+{
+  return {user};
+}
+
+  export default connect (mapStateToProps,null)(Navigationbar);

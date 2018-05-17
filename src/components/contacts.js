@@ -3,13 +3,14 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import fetchFriends from '../actions/fetchFriendList';
 import fetchConversation from '../actions/fetchConversation';
-import getCookie  from '../cookies';
+import getCookie , {setCookie} from '../cookies';
 class Contacts extends Component {
 
     constructor (props)
     {
       super(props);
       this.renderFriends = this.renderFriends.bind(this);
+      this.setCookies = this.setCookies.bind(this);
       this.state = ({'user':''});
     }
 
@@ -17,11 +18,17 @@ class Contacts extends Component {
       this.props.fetchFriends(getCookie('user'));
       }
 
+   setCookies(friend,sessionId)
+   {
+     setCookie(friend,sessionId);
+     setCookie('selectedSession',sessionId);
+     this.props.history.push('/chat');
+   }
    renderFriends (data) {
-        const url = `/chat/${getCookie('user')}/${data.friend.S}/${data.sessionId.S}`;
+     const that = this;
         return (
-          <tr key={data.friend.S}>
-            <td> <a href={url}>{data.friend.S}</a></td>
+          <tr key={data.friend.S} onClick ={ ()=>that.setCookies(data.friend.S,data.sessionId.S)}>
+            <td >{data.friend.S}</td>
             </tr>
           );
       }

@@ -22,7 +22,7 @@ class App extends Component {
           <Route path='/singup' component={Signup}/>
           <Route path='/profile' component={Profile}/>
           <Route path='/contacts' component={Contacts}/>
-          <Route path='/chat/:user/:friend/:sessionId' component={Chat}/>)}/>
+          <Route path='/chat' component={Chat}/>)}/>
         </Switch>
       </Router>
       </div>

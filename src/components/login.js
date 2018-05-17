@@ -49,7 +49,6 @@ class Login extends Component {
            token = result.getAccessToken().getJwtToken();
            const userInfo = {'LoginUser':that.state.Username,'token':token};
            that.props.setLoginInfo(userInfo);
-           console.log(that.state.Username);
            setCookie('user',that.state.Username);
            setCookie('token',token);
        },

@@ -3,6 +3,7 @@ import '../css/chat.css';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import fetchConversation from '../actions/fetchConversation';
+import getCookie from '../cookies';
 import axios from 'axios';
 
 class Chat extends Component {
@@ -10,18 +11,18 @@ class Chat extends Component {
     constructor (props) {
         super(props);
         this.state = ({'user':props.match.params.user,
-                       'friend':props.match.params.friend,
-                       'sessionId':props.match.params.sessionId,
+                       'friend':getCookie('friend'),
                        'message':''});
         this.renderChatBody = this.renderChatBody.bind(this);
         this.onInputChange = this.onInputChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         const that = this;
-        setInterval(function() {that.props.fetchConversation(that.state.sessionId);} , 1000);
+        setInterval(function() {that.props.fetchConversation(getCookie('selectedSession'))} , 1000);
     }
 
     componentWillMount() {
-        this.props.fetchConversation(this.state.sessionId);
+      console.log(this.state.sessionId)
+        this.props.fetchConversation(getCookie('selectedSession'));
       }
 
     renderChatBody (messageData)

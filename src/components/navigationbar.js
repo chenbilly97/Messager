@@ -5,7 +5,6 @@ import getCookie  from '../cookies';
 
 class Navigationbar extends Component {
   render() {
-    const user = getCookie('user');
     return  (
       <div className="navbar">
         <a href="/login">Home</a>

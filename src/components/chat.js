@@ -10,18 +10,19 @@ class Chat extends Component {
 
     constructor (props) {
         super(props);
-        this.state = ({'user':props.match.params.user,
+        this.state = ({'user':'',
                        'friend':getCookie('friend'),
                        'message':''});
         this.renderChatBody = this.renderChatBody.bind(this);
         this.onInputChange = this.onInputChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         const that = this;
-        setInterval(function() {that.props.fetchConversation(getCookie('selectedSession'))} , 1000);
+        setInterval(function() {that.props.fetchConversation(getCookie('selectedSession'))} , 5000);
     }
 
     componentWillMount() {
-      console.log(this.state.sessionId)
+        this.setState({'user':getCookie('user'),'friend':getCookie('friend'),'sessionId':getCookie(this.state.friend)});
+        console.log(getCookie('friend'));
         this.props.fetchConversation(getCookie('selectedSession'));
       }
 

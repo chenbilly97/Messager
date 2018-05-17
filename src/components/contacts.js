@@ -21,6 +21,7 @@ class Contacts extends Component {
    setCookies(friend,sessionId)
    {
      setCookie(friend,sessionId);
+     setCookie('friend',friend);
      setCookie('selectedSession',sessionId);
      this.props.history.push('/chat');
    }

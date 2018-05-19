@@ -1,4 +1,8 @@
 # Messager
+
+Host Website:
+http://message-zijianc.s3-website-us-east-1.amazonaws.com
+
 React Web Chat Application Using AWS Services
 (1) Use Lambda Function to handle serverless call to access and modify data in DynamoDB
 (2) Use DynamoDB to store user data.

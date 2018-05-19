@@ -10,7 +10,7 @@ import getCookie  from '../cookies';
     constructor (props)
     {
       super(props);
-      this.state = ({'user':'','sex':props.profile.sex,'age':'','race':''});
+      this.state = ({'user':'','sex':'','age':'','race':''});
     }
 
     componentWillMount() {
@@ -19,7 +19,7 @@ import getCookie  from '../cookies';
 
 
     render () {
-        if (getCookie('user') === '')
+        if (getCookie('user') === undefined)
         {
           alert ('Please Sign in ');
           return <Redirect to='/login' />

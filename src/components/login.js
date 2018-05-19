@@ -5,7 +5,8 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {getCognitoUser,AmazonCognitoIdentity} from '../CognitoConfiguration';
 import setLoginInfo from '../actions/setLoginInfo';
-import getCookie , {setCookie} from '../cookies';
+import getCookie , {setCookie,removeCookie} from '../cookies';
+import { Redirect } from 'react-router-dom';
 
 class Login extends Component {
    constructor (props)
@@ -19,8 +20,8 @@ class Login extends Component {
    }
 
    nextPath(path) {
-    this.props.history.push(path);
-  }
+       this.props.history.push(path);
+     }
 
    onUsernameChange (event)
    {
@@ -53,14 +54,12 @@ class Login extends Component {
            setCookie('token',token);
        },
        onFailure: function(err) {
-            setCookie('user','');
            alert(err.message || JSON.stringify(err));
        }
    });
-     if (getCookie('user') === '')
-         this.nextPath('/login');
-      else
-         this.nextPath('/contacts');
+     setTimeout(function () {
+       that.nextPath('/contacts');
+     }, 2000);
    }
 
    onSingupClick (event)
@@ -105,6 +104,11 @@ class Login extends Component {
    }
 
    render(){
+     if (getCookie('user')!==undefined)
+     {
+         removeCookie('user');
+         removeCookie('token');
+       }
      return (
        <div>
          <img src={logo} alt="Smiley face" className="img" height="200" width="200"/>
@@ -113,6 +117,7 @@ class Login extends Component {
      );
    }
 }
+
 
 function mapDispatchToProps(dispatch){
   return bindActionCreators({setLoginInfo},dispatch);

@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import fetchFriends from '../actions/fetchFriendList';
 import fetchConversation from '../actions/fetchConversation';
 import getCookie , {setCookie} from '../cookies';
+import { Redirect } from 'react-router-dom';
 class Contacts extends Component {
 
     constructor (props)
@@ -35,6 +36,11 @@ class Contacts extends Component {
       }
 
       render () {
+        if (getCookie('user') === undefined)
+        {
+          alert ('Please Sign in ');
+          return <Redirect to='/login' />
+         }
        const fs = this.props.friends[0];
        if (fs=== undefined)
          return <div><h1>Loading...</h1></div>;

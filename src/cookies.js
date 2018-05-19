@@ -11,3 +11,8 @@ export default function getCookie(key)
 {
   return cookies.get(key);
 }
+
+export function removeCookie (key)
+{
+  return cookies.remove(key);
+}

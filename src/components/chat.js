@@ -29,7 +29,6 @@ class Chat extends Component {
     renderChatBody (messageData)
     {
        const time = new Date(messageData.time);
-       //console.log(messageData.sender+":"+this.state.user);
         if (messageData.sender !== this.state.user)
         {
           return (
@@ -72,7 +71,6 @@ class Chat extends Component {
    }
 
     render () {
-
         if (this.props.conversation.length === 0)
           return <div><h1>Loading ... </h1></div>
         console.log(this.props.conversation);

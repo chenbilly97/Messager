@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
-import Login from './components/login';
+import Login  from './components/login';
 import Signup from './components/signup';
 import Profile from './components/profile';
 import Navigationbar from './components/navigationbar';
 import Contacts from './components/contacts';
 import Chat from './components/chat';
 import 'bootstrap/dist/css/bootstrap.css';
+import  {removeCookie} from './cookies';
 import { BrowserRouter as Router, Route , Switch } from "react-router-dom";
+import { Redirect } from 'react-router-dom';
 import './AppState';
 
 class App extends Component {
@@ -15,6 +17,7 @@ class App extends Component {
     return (
       <div className="App">
       <Navigationbar/>
+      <div className="content">
       <Router>
         <Switch>
           <Route exact path='/' component={Login}/>
@@ -25,6 +28,7 @@ class App extends Component {
           <Route path='/chat' component={Chat}/>)}/>
         </Switch>
       </Router>
+      </div>
       </div>
     );
   }

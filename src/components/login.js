@@ -1,12 +1,8 @@
 import React , {Component} from 'react';
 import '../css/authentication.css';
 import logo from '../assets/whatsapp.jpg';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
 import {getCognitoUser,AmazonCognitoIdentity} from '../CognitoConfiguration';
-import setLoginInfo from '../actions/setLoginInfo';
 import getCookie , {setCookie,removeCookie} from '../cookies';
-import { Redirect } from 'react-router-dom';
 
 class Login extends Component {
    constructor (props)
@@ -48,8 +44,6 @@ class Login extends Component {
      getCognitoUser().authenticateUser(authenticationDetails, {
        onSuccess: function (result) {
            token = result.getAccessToken().getJwtToken();
-           const userInfo = {'LoginUser':that.state.Username,'token':token};
-           that.props.setLoginInfo(userInfo);
            setCookie('user',that.state.Username);
            setCookie('token',token);
        },
@@ -118,9 +112,4 @@ class Login extends Component {
    }
 }
 
-
-function mapDispatchToProps(dispatch){
-  return bindActionCreators({setLoginInfo},dispatch);
-}
-
-export default connect (null,mapDispatchToProps) (Login);
+export default Login;

@@ -7,9 +7,7 @@ import Navigationbar from './components/navigationbar';
 import Contacts from './components/contacts';
 import Chat from './components/chat';
 import 'bootstrap/dist/css/bootstrap.css';
-import  {removeCookie} from './cookies';
 import { BrowserRouter as Router, Route , Switch } from "react-router-dom";
-import { Redirect } from 'react-router-dom';
 import './AppState';
 
 class App extends Component {
